@@ -27,6 +27,7 @@ def post_view(request, slug):
     context = {
         'post': post,
     }
+
     return render(request, template, context)
 
 

@@ -10,7 +10,7 @@ class Article(models.Model):
     published_at = models.DateTimeField(verbose_name='Дата публикации')
     image = models.ImageField(null=True, blank=True, verbose_name='Изображение',)
     slug = models.SlugField(max_length=255, unique=True, null=True, db_index=True, verbose_name='URL')
-    scopes = models.ManyToManyField('Scopes', through='Tag')
+    tags = models.ManyToManyField('Scopes', through='Tag')
 
     class Meta:
         verbose_name = 'Статья'
@@ -30,7 +30,7 @@ class Article(models.Model):
 
 class Scopes(models.Model):
 
-    scope = models.CharField(max_length=50, verbose_name='Раздел')
+    tag = models.CharField(max_length=50, verbose_name='Раздел')
     slug = models.SlugField(max_length=255, unique=True, verbose_name='URL')
 
     class Meta:
@@ -38,20 +38,20 @@ class Scopes(models.Model):
         verbose_name_plural = 'Разделы'
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.scope)
+        self.slug = slugify(self.tag)
         super(Scopes, self).save(* args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('post', kwargs={'slug': self.slug})
 
     def __str__(self):
-        return self.scope
+        return self.tag
 
 
 class Tag(models.Model):
 
-    tag = models.ForeignKey(Scopes, on_delete=models.PROTECT, related_name='tag')
-    scopes = models.ForeignKey(Article, on_delete=models.PROTECT)
+    tag = models.ForeignKey(Scopes, on_delete=models.PROTECT, related_name='scopes')
+    scopes = models.ForeignKey(Article, on_delete=models.PROTECT, related_name='scopes')
     is_main = models.BooleanField(u'Главная')
 
     class Meta:

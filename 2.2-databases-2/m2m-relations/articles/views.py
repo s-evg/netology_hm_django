@@ -9,10 +9,11 @@ from articles.models import *
 
 def articles_list_view(request):
     template = 'articles/news.html'
-    object_list = Article.objects.all()
+    object_list = Article.objects.all().prefetch_related('scopes').order_by('-published_at')
     context = {
         'object_list': object_list,
     }
+    # print(f'ВОТ ===>>> {object_list[2].scopes.all()}')
 
     # используйте этот параметр для упорядочивания результатов
     # https://docs.djangoproject.com/en/3.1/ref/models/querysets/#django.db.models.query.QuerySet.order_by

@@ -31,6 +31,6 @@ class ArticleAdmin(admin.ModelAdmin):
 
 
 @admin.register(Scopes)
-class ScopeAdmin(admin.ModelAdmin):
-    ordering = ['scope']
-    prepopulated_fields = {'slug': ('scope',)}
+class ScopesAdmin(admin.ModelAdmin):
+    ordering = ['tag']
+    prepopulated_fields = {'slug': ('tag',)}

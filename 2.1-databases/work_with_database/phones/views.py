@@ -24,7 +24,7 @@ def show_catalog_view(request):
     context = {
         'phones': phones,
     }
-    print(f'{sort}===>{phones}')
+    # print(f'{sort}===>{phones}')
     return render(request, template, context)
 
 

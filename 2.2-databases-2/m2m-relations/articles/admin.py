@@ -20,7 +20,7 @@ class TaglineFormset(BaseInlineFormSet):
 
 
 class TagInline(admin.TabularInline):
-    model = Tag
+    model = Scope
     formset = TaglineFormset
 
 
@@ -30,7 +30,7 @@ class ArticleAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 
-@admin.register(Scopes)
+@admin.register(Tag)
 class ScopesAdmin(admin.ModelAdmin):
-    ordering = ['tag']
-    prepopulated_fields = {'slug': ('tag',)}
+    ordering = ['scope']
+    prepopulated_fields = {'slug': ('scope',)}

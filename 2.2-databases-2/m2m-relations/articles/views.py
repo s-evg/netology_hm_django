@@ -13,7 +13,7 @@ def articles_list_view(request):
     context = {
         'object_list': object_list,
     }
-    # print(f'ВОТ ===>>> {object_list[2].scopes.all()}')
+    print(f'ВОТ ===>>> {object_list[2].scopes.all()[1].is_main}')
 
     # используйте этот параметр для упорядочивания результатов
     # https://docs.djangoproject.com/en/3.1/ref/models/querysets/#django.db.models.query.QuerySet.order_by
